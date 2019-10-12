@@ -248,10 +248,10 @@
           let result = "<tbody><tr>";
           let list = generateFizzBuzzList();
 
-          for ([k, v] of Object.entries(list)) {
-            result += `<td>${v}</td>`;
-            if ((parseInt(k) + 1) % 10 === 0) result += "</tr><tr>";
-          }
+          list.forEach((v, k) => {
+            result += `<td>${v}</t>`;
+            if ((k + 1) % 10 === 0) result += "</tr><tr>";
+          });
 
           return result;
         }

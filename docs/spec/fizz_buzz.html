@@ -773,10 +773,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
           let result = "&lt;tbody&gt;&lt;tr&gt;";
           let list = generateFizzBuzzList();
 
-          for ([k, v] of Object.entries(list)) {
-            result += `&lt;td&gt;${v}&lt;/td&gt;`;
-            if ((parseInt(k) + 1) % 10 === 0) result += "&lt;/tr&gt;&lt;tr&gt;";
-          }
+          list.forEach((v, k) =&gt; {
+            result += `&lt;td&gt;${v}&lt;/t&gt;`;
+            if ((k + 1) % 10 === 0) result += "&lt;/tr&gt;&lt;tr&gt;";
+          });
 
           return result;
         }
@@ -823,7 +823,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 13:47:42 JST
+Last updated 2019-10-12 13:52:39 JST
 </div>
 </div>
 </body>
