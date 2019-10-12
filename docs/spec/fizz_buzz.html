@@ -764,9 +764,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
       function renderTable() {
         function header() {
-          let result = "&lt;thead&gt;";
+          let result = "";
           [...Array(10).keys()].forEach(i =&gt; (result += `&lt;th&gt;${i + 1}&lt;/th&gt;`));
-          result += "&lt;/thead&gt;";
           return result;
         }
 
@@ -784,7 +783,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
         let result = `
                 &lt;table class="table table-striped table-responsive-md"&gt;
+                  &lt;thead&gt;
                   ${header()}
+                  &lt;/thead&gt;
                   ${body()}
                 &lt;/table&gt;
         `;
@@ -822,7 +823,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 13:40:45 JST
+Last updated 2019-10-12 13:47:42 JST
 </div>
 </div>
 </body>
