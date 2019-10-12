@@ -251,9 +251,10 @@
         function body() {
           let result = "<tbody><tr>";
           let list = generateFizzBuzzList();
-          for (let i = 1; i <= 100; i++) {
-            result += `<td>${list[i - 1]}</td>`;
-            if (i % 10 === 0) result += "</tr>";
+
+          for ([k, v] of Object.entries(list)) {
+            result += `<td>${v}</td>`;
+            if ((parseInt(k) + 1) % 10 === 0) result += "</tr><tr>";
           }
 
           return result;
