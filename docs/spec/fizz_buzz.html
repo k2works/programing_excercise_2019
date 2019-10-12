@@ -763,20 +763,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       }
 
       function renderTable() {
-        let header = `
-                  &lt;thead&gt;
-                    &lt;th&gt;1&lt;/th&gt;
-                    &lt;th&gt;2&lt;/th&gt;
-                    &lt;th&gt;3&lt;/th&gt;
-                    &lt;th&gt;4&lt;/th&gt;
-                    &lt;th&gt;5&lt;/th&gt;
-                    &lt;th&gt;6&lt;/th&gt;
-                    &lt;th&gt;7&lt;/th&gt;
-                    &lt;th&gt;8&lt;/th&gt;
-                    &lt;th&gt;9&lt;/th&gt;
-                    &lt;th&gt;10&lt;/th&gt;
-                  &lt;/thead&gt;
-        `;
+        function header() {
+          let result = "&lt;thead&gt;";
+
+          for (let i = 1; i &lt;= 10; i++) {
+            result += `&lt;th&gt;${i}&lt;/th&gt;`;
+          }
+
+          return result;
+        }
 
         let body = `
                   &lt;tbody&gt;
@@ -808,7 +803,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         `;
         let result = `
                 &lt;table class="table table-striped table-responsive-md"&gt;
-                  ${header}
+                  ${header()}
                   ${body}
                 &lt;/table&gt;
         `;
@@ -846,7 +841,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 12:22:05 JST
+Last updated 2019-10-12 12:40:54 JST
 </div>
 </div>
 </body>
