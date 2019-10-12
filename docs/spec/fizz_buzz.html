@@ -478,6 +478,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist checklist">
 <ul class="checklist">
 <li>
+<p>&#10003; 1から100まで数をプリントできるようにする</p>
+</li>
+<li>
 <p>&#10063; 「Fizz」を出力できるようにする</p>
 </li>
 <li>
@@ -485,9 +488,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>&#10063; 「FizzBuzz」を出力できるようにする</p>
-</li>
-<li>
-<p>&#10063; 繰り返し実行できるようにする</p>
 </li>
 </ul>
 </div>
@@ -753,13 +753,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       const assert = chai.assert;
       suite("FizzBuzzTest", () =&gt; {
         test("1から100までをプリントする", () =&gt; {
-          assert.equal(1, print1To100());
-          assert.equal(100, print1To100());
+          let list = print1To100();
+          assert.equal(1, list[0]);
+          assert.equal(100, list[99]);
         });
       });
 
       function print1To100() {
-        return 1;
+        let result = [];
+        for (let i = 0; i &lt; 100; i++) {
+          result[i] = i + 1;
+        }
+        return result;
       }
     &lt;/script&gt;
     &lt;script&gt;
@@ -791,7 +796,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 11:34:07 JST
+Last updated 2019-10-12 11:39:54 JST
 </div>
 </div>
 </body>
