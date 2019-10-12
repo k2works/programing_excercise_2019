@@ -773,38 +773,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
           return result;
         }
 
-        let body = `
-                  &lt;tbody&gt;
-                    &lt;tr&gt;
-                      &lt;td&gt;1&lt;/td&gt;
-                      &lt;td&gt;2&lt;/td&gt;
-                      &lt;td&gt;Fizz&lt;/td&gt;
-                      &lt;td&gt;4&lt;/td&gt;
-                      &lt;td&gt;Buzz&lt;/td&gt;
-                      &lt;td&gt;Fizz&lt;/td&gt;
-                      &lt;td&gt;7&lt;/td&gt;
-                      &lt;td&gt;8&lt;/td&gt;
-                      &lt;td&gt;Fizz&lt;/td&gt;
-                      &lt;td&gt;Buzz&lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                      &lt;td&gt;11&lt;/td&gt;
-                      &lt;td&gt;Fizz&lt;/td&gt;
-                      &lt;td&gt;13&lt;/td&gt;
-                      &lt;td&gt;14&lt;/td&gt;
-                      &lt;td&gt;FizzBuzz&lt;/td&gt;
-                      &lt;td&gt;16&lt;/td&gt;
-                      &lt;td&gt;17&lt;/td&gt;
-                      &lt;td&gt;18&lt;/td&gt;
-                      &lt;td&gt;19&lt;/td&gt;
-                      &lt;td&gt;Buzz&lt;/td&gt;
-                    &lt;/tr&gt;
-                  &lt;/tbody&gt;
-        `;
+        function body() {
+          let result = "&lt;tbody&gt;&lt;tr&gt;";
+
+          for (let i = 1; i &lt;= 100; i++) {
+            result += `&lt;td&gt;${i}&lt;/td&gt;`;
+            if (i % 10 === 0) result += "&lt;/tr&gt;";
+          }
+
+          return result;
+        }
+
         let result = `
                 &lt;table class="table table-striped table-responsive-md"&gt;
                   ${header()}
-                  ${body}
+                  ${body()}
                 &lt;/table&gt;
         `;
         return result;
@@ -841,7 +824,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 12:40:54 JST
+Last updated 2019-10-12 12:45:10 JST
 </div>
 </div>
 </body>

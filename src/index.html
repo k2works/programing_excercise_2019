@@ -248,38 +248,21 @@
           return result;
         }
 
-        let body = `
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>2</td>
-                      <td>Fizz</td>
-                      <td>4</td>
-                      <td>Buzz</td>
-                      <td>Fizz</td>
-                      <td>7</td>
-                      <td>8</td>
-                      <td>Fizz</td>
-                      <td>Buzz</td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>Fizz</td>
-                      <td>13</td>
-                      <td>14</td>
-                      <td>FizzBuzz</td>
-                      <td>16</td>
-                      <td>17</td>
-                      <td>18</td>
-                      <td>19</td>
-                      <td>Buzz</td>
-                    </tr>
-                  </tbody>
-        `;
+        function body() {
+          let result = "<tbody><tr>";
+
+          for (let i = 1; i <= 100; i++) {
+            result += `<td>${i}</td>`;
+            if (i % 10 === 0) result += "</tr>";
+          }
+
+          return result;
+        }
+
         let result = `
                 <table class="table table-striped table-responsive-md">
                   ${header()}
-                  ${body}
+                  ${body()}
                 </table>
         `;
         return result;
