@@ -743,17 +743,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         });
       });
 
+      const FIZZ = "Fizz";
+      const BUZZ = "Buzz";
+      const MAX_NUMBER = 100;
+
       function generateFizzBuzzList() {
-        return [...Array(101).keys()].slice(1).map(fizzBuzz);
+        // 配列が0から始まるので1を足して1から始まるようにしている
+        return [...Array(MAX_NUMBER + 1).keys()].slice(1).map(fizzBuzz);
       }
 
       function fizzBuzz(number) {
         const isFizz = number % 3 === 0;
         const isBuzz = number % 5 === 0;
 
-        if (isFizz &amp;&amp; isBuzz) return "FizzBuzz";
-        if (isFizz) return "Fizz";
-        if (isBuzz) return "Buzz";
+        if (isFizz &amp;&amp; isBuzz) return FIZZ + BUZZ;
+        if (isFizz) return FIZZ;
+        if (isBuzz) return BUZZ;
         return number;
       }
 
@@ -819,7 +824,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 13:20:47 JST
+Last updated 2019-10-12 13:29:17 JST
 </div>
 </div>
 </body>
