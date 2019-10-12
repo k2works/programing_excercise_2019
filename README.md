@@ -48,6 +48,12 @@ touch Procfile
 npm run start:asciidocs
 ```
 
+スライド
+
+```bash
+npm run start:slide
+```
+
 **[⬆ back to top](#構成)**
 
 ### 開発
@@ -65,3 +71,4 @@ npm start
 
 - [nodejs](https://nodejs.org/ja/)
 - [Bootstrap](https://getbootstrap.com/)
+- [GitPitch](https://gitpitch.com/)

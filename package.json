@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nf start -j Procfile",
     "start:asciidocs": "nf start -j docs/Procfile",
+    "start:slide": "nf start -j docs/slide/Procfile",
     "lint": "eslint src/**/*.js",
     "format": "prettier --write src/**/*.*",
     "watch": "watch 'npm-run-all format format' ./src ",
@@ -14,7 +15,10 @@
     "docs:asciidocs:proxy": "browser-sync start --config docs/bs-config.js",
     "docs:asciidocs:build": "gradle asciidoctor",
     "docs:asciidocs:watch": "watch 'npm-run-all docs:asciidocs:build' ./docs/src",
-    "docs:asciidocs:local": "gradle livereload"
+    "docs:asciidocs:local": "gradle livereload",
+    "docs:slide:proxy": "browser-sync start --config docs/slide/bs-config.js",
+    "docs:slide:build": "cpx 'docs/slide/assets/md/PITCHME.md' ./",
+    "docs:slide:watch": "watch 'npm-run-all docs:slide:build' ./docs/slide/assets/md"
   },
   "repository": {
     "type": "git",
