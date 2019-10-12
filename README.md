@@ -1,5 +1,6 @@
 # プログラミング演習 2019
 
+
 ## 概要
 
 ### 目的
@@ -44,7 +45,16 @@ touch Procfile
 **[⬆ back to top](#構成)**
 
 ### 開発
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/k2works/programing_excercise_2019)
+
+```bash
+npm install
+npm start
+```
 
 **[⬆ back to top](#構成)**
 
 ## 参照
+
+- [nodejs](https://nodejs.org/ja/)
+- [Bootstrap](https://getbootstrap.com/)
