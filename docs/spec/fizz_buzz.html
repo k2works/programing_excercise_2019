@@ -769,10 +769,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
         const row = (() =&gt; {
           let result = [];
-          let list = generateFizzBuzzList();
           let row = 0;
           let col = [];
-          list.forEach((v, k) =&gt; {
+          generateFizzBuzzList().forEach((v, k) =&gt; {
             if ((k + 1) % 10 === 0) {
               col.push(`&lt;td&gt;${v}&lt;/t&gt;`);
               result[row++] = col;
@@ -847,7 +846,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 14:54:42 JST
+Last updated 2019-10-12 14:58:24 JST
 </div>
 </div>
 </body>

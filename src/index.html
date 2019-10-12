@@ -244,10 +244,9 @@
 
         const row = (() => {
           let result = [];
-          let list = generateFizzBuzzList();
           let row = 0;
           let col = [];
-          list.forEach((v, k) => {
+          generateFizzBuzzList().forEach((v, k) => {
             if ((k + 1) % 10 === 0) {
               col.push(`<td>${v}</t>`);
               result[row++] = col;
