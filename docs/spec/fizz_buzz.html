@@ -722,7 +722,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       const assert = chai.assert;
       suite("FizzBuzzTest", () =&gt; {
         test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを15で割り切れる場合はFizzBuzzをプリントする", () =&gt; {
-          let list = print1To100();
+          let list = generateFizzBuzzList();
           assert.equal(1, list[0]);
           assert.equal("Fizz", list[2]);
           assert.equal("Buzz", list[4]);
@@ -743,7 +743,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         });
       });
 
-      function print1To100() {
+      function generateFizzBuzzList() {
         let result = [];
         for (let i = 0; i &lt; 100; i++) {
           result[i] = fizzBuzz(i + 1);
@@ -778,7 +778,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
         function body() {
           let result = "&lt;tbody&gt;&lt;tr&gt;";
-          let list = print1To100();
+          let list = generateFizzBuzzList();
           for (let i = 1; i &lt;= 100; i++) {
             result += `&lt;td&gt;${list[i - 1]}&lt;/td&gt;`;
             if (i % 10 === 0) result += "&lt;/tr&gt;";
@@ -827,7 +827,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 12:59:30 JST
+Last updated 2019-10-12 13:04:48 JST
 </div>
 </div>
 </body>
