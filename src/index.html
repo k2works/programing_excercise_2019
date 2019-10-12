@@ -238,8 +238,7 @@
       }
 
       function renderTable() {
-        let result = `
-                <table class="table table-striped table-responsive-md">
+        let header = `
                   <thead>
                     <th>1</th>
                     <th>2</th>
@@ -252,6 +251,9 @@
                     <th>9</th>
                     <th>10</th>
                   </thead>
+        `;
+
+        let body = `
                   <tbody>
                     <tr>
                       <td>1</td>
@@ -278,6 +280,11 @@
                       <td>Buzz</td>
                     </tr>
                   </tbody>
+        `;
+        let result = `
+                <table class="table table-striped table-responsive-md">
+                  ${header}
+                  ${body}
                 </table>
         `;
         return result;

@@ -763,8 +763,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       }
 
       function renderTable() {
-        let result = `
-                &lt;table class="table table-striped table-responsive-md"&gt;
+        let header = `
                   &lt;thead&gt;
                     &lt;th&gt;1&lt;/th&gt;
                     &lt;th&gt;2&lt;/th&gt;
@@ -777,6 +776,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
                     &lt;th&gt;9&lt;/th&gt;
                     &lt;th&gt;10&lt;/th&gt;
                   &lt;/thead&gt;
+        `;
+
+        let body = `
                   &lt;tbody&gt;
                     &lt;tr&gt;
                       &lt;td&gt;1&lt;/td&gt;
@@ -803,6 +805,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
                       &lt;td&gt;Buzz&lt;/td&gt;
                     &lt;/tr&gt;
                   &lt;/tbody&gt;
+        `;
+        let result = `
+                &lt;table class="table table-striped table-responsive-md"&gt;
+                  ${header}
+                  ${body}
                 &lt;/table&gt;
         `;
         return result;
@@ -839,7 +846,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 12:18:03 JST
+Last updated 2019-10-12 12:22:05 JST
 </div>
 </div>
 </body>
