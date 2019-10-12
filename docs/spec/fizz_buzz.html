@@ -765,11 +765,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       function renderTable() {
         function header() {
           let result = "&lt;thead&gt;";
-
-          for (let i = 1; i &lt;= 10; i++) {
-            result += `&lt;th&gt;${i}&lt;/th&gt;`;
-          }
-
+          [...Array(10).keys()].forEach(i =&gt; (result += `&lt;th&gt;${i + 1}&lt;/th&gt;`));
+          result += "&lt;/thead&gt;";
           return result;
         }
 
@@ -825,7 +822,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 13:34:10 JST
+Last updated 2019-10-12 13:40:45 JST
 </div>
 </div>
 </body>

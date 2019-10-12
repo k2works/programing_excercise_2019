@@ -240,11 +240,8 @@
       function renderTable() {
         function header() {
           let result = "<thead>";
-
-          for (let i = 1; i <= 10; i++) {
-            result += `<th>${i}</th>`;
-          }
-
+          [...Array(10).keys()].forEach(i => (result += `<th>${i + 1}</th>`));
+          result += "</thead>";
           return result;
         }
 
