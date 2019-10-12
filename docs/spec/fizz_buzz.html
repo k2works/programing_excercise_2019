@@ -763,13 +763,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       }
 
       function renderTable() {
-        const header = (function header() {
-          let result = "";
-          [...Array(10).keys()].forEach(i =&gt; (result += `&lt;th&gt;${i + 1}&lt;/th&gt;`));
-          return result;
+        const th = (() =&gt; {
+          return [...Array(10).keys()].map(i =&gt; `&lt;th&gt;${i + 1}&lt;/th&gt;`);
         })();
 
-        const row = (function body() {
+        const row = (() =&gt; {
           let result = [];
           let list = generateFizzBuzzList();
           let row = 0;
@@ -790,7 +788,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         let result = `
                 &lt;table class="table table-striped table-responsive-md"&gt;
                   &lt;thead&gt;
-                    ${header}
+                    ${th[0]}
+                    ${th[1]}
+                    ${th[2]}
+                    ${th[3]}
+                    ${th[4]}
+                    ${th[5]}
+                    ${th[6]}
+                    ${th[7]}
+                    ${th[8]}
+                    ${th[9]}
                   &lt;/thead&gt;
                   &lt;tbody&gt;
                     &lt;tr&gt;${row[0]}&lt;/tr&gt;
@@ -840,7 +847,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 14:22:57 JST
+Last updated 2019-10-12 14:54:42 JST
 </div>
 </div>
 </body>
