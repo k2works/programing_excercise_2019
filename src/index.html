@@ -219,11 +219,7 @@
       });
 
       function generateFizzBuzzList() {
-        let result = [];
-        [...Array(100).keys()].forEach(i => {
-          result.push(fizzBuzz(i + 1));
-        });
-        return result;
+        return [...Array(101).keys()].slice(1).map(i => fizzBuzz(i));
       }
 
       function fizzBuzz(number) {
