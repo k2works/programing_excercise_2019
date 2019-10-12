@@ -42,9 +42,16 @@ touch Procfile
 
 ### 運用
 
+ドキュメント
+
+```bash
+npm run start:asciidocs
+```
+
 **[⬆ back to top](#構成)**
 
 ### 開発
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/k2works/programing_excercise_2019)
 
 ```bash
