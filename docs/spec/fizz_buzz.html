@@ -763,30 +763,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       }
 
       function renderTable() {
-        function header() {
+        const header = (function header() {
           let result = "";
           [...Array(10).keys()].forEach(i =&gt; (result += `&lt;th&gt;${i + 1}&lt;/th&gt;`));
           return result;
-        }
+        })();
 
-        function body() {
-          let result = "&lt;tbody&gt;&lt;tr&gt;";
+        const row = (function body() {
+          let result = [];
           let list = generateFizzBuzzList();
-
+          let row = 0;
+          let col = [];
           list.forEach((v, k) =&gt; {
-            result += `&lt;td&gt;${v}&lt;/t&gt;`;
-            if ((k + 1) % 10 === 0) result += "&lt;/tr&gt;&lt;tr&gt;";
+            if ((k + 1) % 10 === 0) {
+              col.push(`&lt;td&gt;${v}&lt;/t&gt;`);
+              result[row++] = col;
+              col = [];
+            } else {
+              col.push(`&lt;td&gt;${v}&lt;/t&gt;`);
+            }
           });
 
           return result;
-        }
+        })();
 
         let result = `
                 &lt;table class="table table-striped table-responsive-md"&gt;
                   &lt;thead&gt;
-                  ${header()}
+                    ${header}
                   &lt;/thead&gt;
-                  ${body()}
+                  &lt;tbody&gt;
+                    &lt;tr&gt;${row[0]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[1]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[2]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[3]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[4]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[5]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[6]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[7]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[8]}&lt;/tr&gt;
+                    &lt;tr&gt;${row[9]}&lt;/tr&gt;
+                  &lt;/tbody&gt;
                 &lt;/table&gt;
         `;
         return result;
@@ -823,7 +840,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 13:52:39 JST
+Last updated 2019-10-12 14:22:57 JST
 </div>
 </div>
 </body>
