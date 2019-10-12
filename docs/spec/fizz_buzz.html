@@ -763,7 +763,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
       }
 
       function renderTable() {
-        const result = () =&gt; {
+        return (() =&gt; {
           const th = (() =&gt; {
             return [...Array(10).keys()].map(i =&gt; `&lt;th&gt;${i + 1}&lt;/th&gt;`);
           })();
@@ -813,9 +813,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
                   &lt;/tbody&gt;
                 &lt;/table&gt;
         `;
-        };
-
-        return result();
+        })();
       }
 
       document.querySelector("#app-fizzbuzz").innerHTML = renderTable();
@@ -849,7 +847,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 15:08:51 JST
+Last updated 2019-10-12 15:12:52 JST
 </div>
 </div>
 </body>
