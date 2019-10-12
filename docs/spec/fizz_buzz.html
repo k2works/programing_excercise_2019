@@ -637,7 +637,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
               &lt;!-- 右側カラム（画面幅md以上） --&gt;
               &lt;div class="col-md-10"&gt;
                 &lt;ul&gt;
-                  &lt;li&gt;1 から 100 まで数をプリントできるようにする。&lt;/li&gt;
+                  &lt;li&gt;
+                    &lt;del&gt;1 から 100 まで数をプリントできるようにする。&lt;/del&gt;
+                  &lt;/li&gt;
                   &lt;li&gt;
                     3
                     の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
@@ -757,6 +759,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
           assert.equal(1, list[0]);
           assert.equal(100, list[99]);
         });
+
+        test("3で割り切れる場合はFizzをプリントする", () =&gt; {
+          assert.equal("Fizz", fizzBuzz(3));
+        });
       });
 
       function print1To100() {
@@ -796,7 +802,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-12 11:39:54 JST
+Last updated 2019-10-12 11:44:46 JST
 </div>
 </div>
 </body>
