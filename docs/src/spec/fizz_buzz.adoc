@@ -13,10 +13,10 @@
 
 == 設計
 === TODOリスト
-* [ ] 「Fizz」を出力できるようにする
-* [ ] 「Buzz」を出力できるようにする
-* [ ] 「FizzBuzz」を出力できるようにする
-* [ ] 繰り返し実行できるようにする
+* [x]  1から100まで数をプリントできるようにする
+* [x] 「Fizz」を出力できるようにする
+* [x] 「Buzz」を出力できるようにする
+* [x] 「FizzBuzz」を出力できるようにする
 
 === ユースケース図
 [plantuml]
@@ -54,6 +54,13 @@ end
 
 == 開発
 
+[source, html]
+----
+include::../../../src/index.html[]
+----
+
 == 参照
-* Asciidoctor[http://asciidoctor.org/]
-* PlantUML[http://www.plantuml.com]
+
+* http://asciidoctor.org/[Asciidoctor]
+
+* http://www.plantuml.com[PlantUML]
