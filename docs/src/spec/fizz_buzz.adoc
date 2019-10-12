@@ -54,6 +54,13 @@ end
 
 == 開発
 
+[source, html]
+----
+include::../../../src/index.html[]
+----
+
 == 参照
-* Asciidoctor[http://asciidoctor.org/]
-* PlantUML[http://www.plantuml.com]
+
+* http://asciidoctor.org/[Asciidoctor]
+
+* http://www.plantuml.com[PlantUML]
