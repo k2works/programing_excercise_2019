@@ -18,7 +18,9 @@
     "docs:asciidocs:local": "gradle livereload",
     "docs:slide:proxy": "browser-sync start --config docs/slide/bs-config.js",
     "docs:slide:build": "cpx 'docs/slide/assets/md/PITCHME.md' ./",
-    "docs:slide:watch": "watch 'npm-run-all docs:slide:build' ./docs/slide/assets/md"
+    "docs:slide:watch": "watch 'npm-run-all docs:slide:build' ./docs/slide/assets/md",
+    "docs:slide:conv": "marp ./docs/slide/assets/md/PITCHME.md",
+    "docs:slide:preview": "npx marp -p -w ./docs/slide/assets/md/"
   },
   "repository": {
     "type": "git",
@@ -46,5 +48,8 @@
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "@marp-team/marp-cli": "^0.15.0"
   }
 }

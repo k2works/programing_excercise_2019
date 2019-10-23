@@ -27,7 +27,7 @@
 
 ```bash
 npm init -y
-npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html
+npm install --save-dev npm-run-all watch foreman cpx rimraf markdown-to-html @marp-team/marp-cli
 npm install --save-dev prettier eslint jshint cross-env @prettier/plugin-ruby
 npm install --save-dev browser-sync connect-browser-sync nodemon
 npx browser-sync init
@@ -72,3 +72,4 @@ npm start
 - [nodejs](https://nodejs.org/ja/)
 - [Bootstrap](https://getbootstrap.com/)
 - [GitPitch](https://gitpitch.com/)
+- [marp-cli](https://github.com/marp-team/marp-cli)
