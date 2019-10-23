@@ -198,7 +198,7 @@
       const assert = chai.assert;
       suite("FizzBuzzTest", () => {
         test("1から100までをプリントする,ただし3で割り切れる場合Fizz5で割り切れる場合はBuzz両方で割り切れる場合はFizzBuzzをプリントする", () => {
-          let result = print1To100();
+          let result = generateList();
           assert.equal(1, result[0]);
           assert.equal("Fizz", result[2]);
           assert.equal("Buzz", result[4]);
@@ -207,18 +207,26 @@
         });
 
         test("3で割り切れる場合はFizzをプリントする", () => {
-          assert.equal("Fizz", fizzBuzz(3));
+          assert.equal("Fizz", generate(3));
         });
 
         test("5で割り切れる場合はBuzzをプリントする", () => {
-          assert.equal("Buzz", fizzBuzz(5));
+          assert.equal("Buzz", generate(5));
         });
 
         test("15で割り切れる場合はFizzBuzzをプリントする", () => {
-          assert.equal("FizzBuzz", fizzBuzz(15));
+          assert.equal("FizzBuzz", generate(15));
         });
       });
-      function fizzBuzz(number) {
+
+      function generateList() {
+        let result = [];
+        for (let i = 0; i < 100; i++) {
+          result[i] = generate(i + 1);
+        }
+        return result;
+      }
+      function generate(number) {
         let result = number;
 
         if (number % 3 === 0 && number % 5 === 0) {
@@ -232,14 +240,6 @@
         return result;
       }
 
-      function print1To100() {
-        let result = [];
-        for (let i = 0; i < 100; i++) {
-          result[i] = fizzBuzz(i + 1);
-        }
-        return result;
-      }
-
       function renderTable() {
         let header = () => {
           let result = "<thead>";
@@ -250,7 +250,7 @@
           return result;
         };
         let body = () => {
-          let list = print1To100();
+          let list = generateList();
           let result = "<tbody><tr>";
           for (let i = 0; i < 100; i++) {
             result += `<td>${list[i]}</td>`;
