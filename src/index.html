@@ -241,10 +241,9 @@
         })();
 
         let body = (() => {
-          let list = generateList();
           let result = [];
-          var row = [];
-          list.forEach((v, k) => {
+          let row = [];
+          generateList().forEach((v, k) => {
             row.push(`<td>${v}</td>`);
             if ((k + 1) % 10 === 0) {
               result.push(row);
