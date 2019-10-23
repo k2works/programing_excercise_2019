@@ -121,7 +121,11 @@
                       の倍数のときは数の代わりに｢Fizz｣をプリントできるようにする。
                     </del>
                   </li>
-                  <li>5 の倍数のときは｢Buzz｣とプリントできるようにする。</li>
+                  <li>
+                    <del
+                      >5 の倍数のときは｢Buzz｣とプリントできるようにする。</del
+                    >
+                  </li>
                   <li>
                     3 と 5
                     両方の倍数の場合には｢FizzBuzz｣とプリントできるようにする
@@ -239,6 +243,9 @@
         test("3で割り切れる場合はFizzをプリントする", () => {
           assert.equal("Fizz", fizzBuzz(3));
         });
+        test("5で割り切れる場合はBuzzをプリントする", () => {
+          assert.equal("Buzz", fizzBuzz(5));
+        });
       });
       function print1To100() {
         let result = [];
@@ -251,6 +258,8 @@
         let result = number;
         if (number % 3 === 0) {
           result = "Fizz";
+        } else if (number % 5 === 0) {
+          result = "Buzz";
         }
         return result;
       }
