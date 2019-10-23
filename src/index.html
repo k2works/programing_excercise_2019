@@ -236,14 +236,10 @@
       }
 
       function renderTable() {
-        let header = () => {
-          let result = "<thead>";
-          for (let i = 1; i <= 10; i++) {
-            result += `<th>${i}</th>`;
-          }
-          result += "</thead>";
-          return result;
-        };
+        const header = (() => {
+          return [...Array(10).keys()].map(i => `<th>${i + 1}</th>`);
+        })();
+
         let body = () => {
           let list = generateList();
           let result = "<tbody><tr>";
@@ -256,7 +252,18 @@
         };
         let result = `
             <table class="table table-striped table-responsive-md">
-              ${header()}
+              <thead>
+               ${header[0]}
+               ${header[1]}
+               ${header[2]}
+               ${header[3]}
+               ${header[4]}
+               ${header[5]}
+               ${header[6]}
+               ${header[7]}
+               ${header[8]}
+               ${header[9]}
+              </thead>
               ${body()}
               </table>
         `;
