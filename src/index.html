@@ -220,7 +220,7 @@
       });
 
       function generateList() {
-        return [...Array(100).keys()].map(i => generate(i + 1));
+        return [...Array(101).keys()].slice(1).map(generate);
       }
       function generate(number) {
         const isFizz = number % 3 === 0;
