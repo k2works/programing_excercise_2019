@@ -234,15 +234,21 @@
         const header = (() => {
           return [...Array(10).keys()].map(v => `<th>${v + 1}</th>`);
         })();
-        let body = () => {
+
+        const body = (() => {
           let list = generateFizzBuzzList();
-          let result = "<tr>";
-          for (let i = 0; i < 100; i++) {
-            result += `<td>${list[i]}</td>`;
-            if ((i + 1) % 10 === 0) result += `</tr><tr>`;
-          }
+          let result = [];
+          let row = [];
+          list.forEach((v, k) => {
+            row.push(`<td>${v}</td>`);
+            if ((k + 1) % 10 === 0) {
+              result.push(row);
+              row = [];
+            }
+          });
           return result;
-        };
+        })();
+
         let result = `
         <table class="table table-striped table-responsive-md">
           <thead>
@@ -258,7 +264,16 @@
             ${header[9]}
           </thead>
           <tbody>
-            ${body()}
+            <tr>${body[0].join("")}</tr>
+            <tr>${body[1].join("")}</tr>
+            <tr>${body[2].join("")}</tr>
+            <tr>${body[3].join("")}</tr>
+            <tr>${body[4].join("")}</tr>
+            <tr>${body[5].join("")}</tr>
+            <tr>${body[6].join("")}</tr>
+            <tr>${body[7].join("")}</tr>
+            <tr>${body[8].join("")}</tr>
+            <tr>${body[9].join("")}</tr>
           </tbody>
         </table>
         `;
