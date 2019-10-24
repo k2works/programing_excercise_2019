@@ -114,7 +114,7 @@
 
 ### プログラミングってどうやったら上手くなるのよ？
 
-Rubyで[FizzBuzz問題](https://gitpitch.com/k2works/ruby_basic_exercises)をやってみよう
+RubyでFizzBuzz問題をやってみよう
 
 ---
 
@@ -125,6 +125,475 @@ Railsで[サンプルサイト](https://fizzbuzz-dev.azurewebsites.net/)を作�
 ---
 
 ### おわり
+
+---
+
+### FizzBuzz問題
+
+プログラムを作る方法はいろいろありますが一般的に以下の手順で進めます。
+
+1. 仕様を決める
+1. 設計する
+1. 実装する
+
+---
+
+### FizzBuzz問題
+
+まず、[仕様を決めます](https://github.com/k2works/ruby_basic_exercises/blob/b3a810733db506e40a762f926c1fe718a580cb78/docs/src/demonstration/index.adoc)
+#### 仕様
++ ３で割り切れる場合は「Fizz」を出力する。
++ ５で割り切れる場合は「Buzz」を出力する。
++ 両者で割り切れる場合は「FizzBuzz」を出力する。
++ 指定された回数だけ繰り返し実行する。
+
+---
+
+### FizzBuzz問題
+
+続いてプログラムの設計をします。
+
+まず、[TODOリスト](https://github.com/k2works/ruby_basic_exercises/blob/b3a810733db506e40a762f926c1fe718a580cb78/docs/src/demonstration/index.adoc)を作成しましょう
+
+#### TODOリスト
++ Fizzを出力できるようにする
++ Buzzを出力できるようにする
++ FizzBuzzを出力できるようにする
++ 繰り返し実行できるようにする
+
+---
+### FizzBuzz問題
+
+必要に応じて以下の図表を作成することがあります。
+
++ ユースケース図
++ クラス図
++ シーケンス図
+
+---
+
+### FizzBuzz問題
+
+設計が終わったらプログラムの実装です。
+
+まず、クラスを作成しましょう。
+
+```ruby
+class FizzBuzz
+end
+```
+---
+### FizzBuzz問題
+
+テストをしながら設計のTODOリストを一つづつ片付けていきましょう
+
+```ruby
+class FizzBuzz
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    it '3ならばFizzを返す' do
+      expect(3).must_equal 'Fizz'
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+クラスにメソッドを追加します
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    'Fizz'
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+3以外の数字でもFizzを返すことができるようにしましょう。
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0
+      'Fizz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '30ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'Fizz'
+      end
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+TODOを一つ片付けることができました。
+
+では、次のTODOに取り組みましょう。
+
+#### TODOリスト
++ ~~Fizzを出力できるようにする~~
++ **Buzzを出力できるようにする**
++ FizzBuzzを出力できるようにする
++ 繰り返し実行できるようにする
+
+---
+
+### FizzBuzz問題
+
+まずはテストを追加しましょう
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0
+      'Fizz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '30ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'Fizz'
+      end
+
+      it '5ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(5)).must_equal 'Buzz'
+      end
+    end
+  end
+```
+---
+
+### FizzBuzz問題
+
+テストが通るように条件を変更しましょう。
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0
+      'Fizz'
+    elsif number % 5 == 0
+      'Buzz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '30ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'Fizz'
+      end
+
+      it '5ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(5)).must_equal 'Buzz'
+      end
+
+      it '10ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(10)).must_equal 'Buzz'
+      end
+
+      it '50ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(50)).must_equal 'Buzz'
+      end
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+２つ目のTODOを片付けることができました。
+
+では、次のTODOに取り組みましょう。
+
+#### TODOリスト
++ ~~Fizzを出力できるようにする~~
++ ~~Buzzを出力できるようにする~~
++ **FizzBuzzを出力できるようにする**
++ 繰り返し実行できるようにする
+
+---
+
+### FizzBuzz問題
+
+まずは・・・テストからですよね。
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0
+      'Fizz'
+    elsif number % 5 == 0
+      'Buzz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '30ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'Fizz'
+      end
+
+      it '5ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(5)).must_equal 'Buzz'
+      end
+
+      it '10ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(10)).must_equal 'Buzz'
+      end
+
+      it '50ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(50)).must_equal 'Buzz'
+      end
+
+      it '15ならばFizzBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(15)).must_equal 'FizzBuzz'
+      end
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+続いて、テストが通るようにプログラムを変更しましょう。
+
+おや、テストが失敗してしまいました。
+
+なぜでしょうか？
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0
+      'Fizz'
+    elsif number % 5 == 0
+      'Buzz'
+    elsif number % 3 == 0 and number % 5 == 0
+      'FizzBuzz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '30ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'Fizz'
+      end
+
+      it '5ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(5)).must_equal 'Buzz'
+      end
+
+      it '10ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(10)).must_equal 'Buzz'
+      end
+
+      it '50ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(50)).must_equal 'Buzz'
+      end
+
+      it '15ならばFizzBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(15)).must_equal 'FizzBuzz'
+      end
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+どうやら変更した条件では思ったとおりにプログラムが動いてくれなかったようです。
+
+思ったとおりに動くようにプログラムを修正しましょう。
+
+テストが通りましたか？
+
+```ruby
+class FizzBuzz
+  def generate(number)
+    if number % 3 == 0 and number % 5 == 0
+      'FizzBuzz'
+    elsif number % 3 == 0
+      'Fizz'
+    elsif number % 5 == 0
+      'Buzz'
+    end
+  end
+end
+
+require 'minitest/autorun'
+class FizzBuzzSpec < Minitest::Spec
+  describe FizzBuzz do
+    describe '#generate' do
+      it '3ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(3)).must_equal 'Fizz'
+      end
+
+      it '6ならばFizzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(6)).must_equal 'Fizz'
+      end
+
+      it '5ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(5)).must_equal 'Buzz'
+      end
+
+      it '10ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(10)).must_equal 'Buzz'
+      end
+
+      it '50ならばBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(50)).must_equal 'Buzz'
+      end
+
+      it '15ならばFizzBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(15)).must_equal 'FizzBuzz'
+      end
+
+      it '30ならばFizzBuzzを返す' do
+        fizz_buzz = FizzBuzz.new
+        expect(fizz_buzz.generate(30)).must_equal 'FizzBuzz'
+      end
+
+    end
+  end
+end
+```
+---
+
+### FizzBuzz問題
+
+３つ目のTODOを片付けることができました。
+
+いよいよ最後のTODOですがこれはちょっと難しいのでやってみてわからないときはプログラムの上手い人に相談してみましょう。
+
+#### TODOリスト
++ ~~Fizzを出力できるようにする~~
++ ~~Buzzを出力できるようにする~~
++ ~~FizzBuzzを出力できるようにする~~
++ 繰り返し実行できるようにする
+---
+
+### FizzBuzz問題
+
+最終的な完成イメージが[こちら](https://k2works.github.io/ruby_basic_exercises/demonstration/index.html)になります。
+---
 
 ---
 
