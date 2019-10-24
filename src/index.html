@@ -231,13 +231,9 @@
         return number;
       }
       function renderTable() {
-        let header = () => {
-          let result = "";
-          for (let i = 1; i <= 10; i++) {
-            result += `<th>${i}</th>`;
-          }
-          return result;
-        };
+        const header = (() => {
+          return [...Array(10).keys()].map(v => `<th>${v + 1}</th>`);
+        })();
         let body = () => {
           let list = generateFizzBuzzList();
           let result = "<tr>";
@@ -250,7 +246,16 @@
         let result = `
         <table class="table table-striped table-responsive-md">
           <thead>
-            ${header()}
+            ${header[0]}
+            ${header[1]}
+            ${header[2]}
+            ${header[3]}
+            ${header[4]}
+            ${header[5]}
+            ${header[6]}
+            ${header[7]}
+            ${header[8]}
+            ${header[9]}
           </thead>
           <tbody>
             ${body()}
