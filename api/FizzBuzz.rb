@@ -46,15 +46,15 @@ class FizzBuzzTest < Minitest::Test
 end
 
 class FizzBuzz
-    def self.generate(number)
-        result = number.to_s
-        if number.modulo(3) == 0 and number.modulo(5) == 0
-            result = "FizzBuzz"
-        elsif number.modulo(3) == 0
-            result = "Fizz"
-        elsif number.modulo(5) == 0
-            result = "Buzz"
-        end
-        result
+  def self.generate(number)
+    result = number.to_s
+    if number.modulo(3) == 0 and number.modulo(5) == 0
+      result = 'FizzBuzz'
+    elsif number.modulo(3) == 0
+      result = 'Fizz'
+    elsif number.modulo(5) == 0
+      result = 'Buzz'
     end
+    result
+  end
 end
