@@ -1,5 +1,8 @@
 {
   "name": "programing_excercise_2019",
+  "engines": {
+  "node": "10.x"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
