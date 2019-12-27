@@ -8,7 +8,7 @@ require 'minitest/autorun'
 - [x] 3 の倍数のときは数の代わりに｢Fizz｣と返す
   - [x] 3を渡したら文字列"Fizz"を返す
 - [x] 5 の倍数のときは｢Buzz｣と返す
-- [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
+- [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
 - [ ] 1 から 100 までの数
 - [ ] プリントする
 =end
@@ -31,6 +31,12 @@ class FizzBuzzTest < Minitest::Test
       end
     end
 
+    describe '三と五の倍数の場合' do
+      def test_15を渡したら文字列FizzBuzzを返す
+        assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
+      end
+    end
+
     describe 'その他の場合' do
       def test_1を渡したら文字列1を返す
         assert_equal '1', @fizzbuzz.generate(1)
@@ -42,7 +48,9 @@ end
 class FizzBuzz
     def self.generate(number)
         result = number.to_s
-        if number.modulo(3) == 0
+        if number.modulo(3) == 0 and number.modulo(5) == 0
+            result = "FizzBuzz"
+        elsif number.modulo(3) == 0
             result = "Fizz"
         elsif number.modulo(5) == 0
             result = "Buzz"
