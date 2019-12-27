@@ -2,12 +2,12 @@ require 'minitest/autorun'
 
 # TODOリスト
 =begin
-- [ ] 数を文字列にして返す
+- [x] 数を文字列にして返す
   - [x] 1を渡したら文字列"1"を返す
   - [x] 2を渡したら文字列"2"を返す
-- [ ] 3 の倍数のときは数の代わりに｢Fizz｣と返す
+- [x] 3 の倍数のときは数の代わりに｢Fizz｣と返す
   - [x] 3を渡したら文字列"Fizz"を返す
-- [ ] 5 の倍数のときは｢Buzz｣と返す
+- [x] 5 の倍数のときは｢Buzz｣と返す
 - [ ] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
 - [ ] 1 から 100 までの数
 - [ ] プリントする
@@ -28,6 +28,10 @@ class FizzBuzzTest < Minitest::Test
     def test_3を渡したら文字列Fizzを返す
         assert_equal "Fizz", @fizzbuzz.generate(3)
     end
+
+    def test_5を渡したら文字列Buzzを返す
+        assert_equal "Buzz", @fizzbuzz.generate(5)
+    end
 end
 
 class FizzBuzz
@@ -35,6 +39,8 @@ class FizzBuzz
         result = number.to_s
         if number.modulo(3) == 0
             result = "Fizz"
+        elsif number.modulo(5) == 0
+            result = "Buzz"
         end
         result
     end
