@@ -66,3 +66,4 @@ typings/
 .settings
 
 gradle
+.gradle

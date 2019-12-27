@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nf start -j Procfile",
     "start:asciidocs": "nf start -j docs/Procfile",
-    "start:slide": "nf start -j docs/slide/Procfile",
+    "start:slide": "nf start -j docs/slides/Procfile",
     "lint": "eslint src/**/*.js",
     "format": "prettier --write src/**/*.*",
     "watch": "watch 'npm-run-all format format' ./src ",
@@ -16,11 +16,11 @@
     "docs:asciidocs:build": "gradle asciidoctor",
     "docs:asciidocs:watch": "watch 'npm-run-all docs:asciidocs:build' ./docs/src",
     "docs:asciidocs:local": "gradle livereload",
-    "docs:slide:proxy": "browser-sync start --config docs/slide/bs-config.js",
-    "docs:slide:build": "cpx 'docs/slide/assets/md/PITCHME.md' ./",
-    "docs:slide:watch": "watch 'npm-run-all docs:slide:build' ./docs/slide/assets/md",
-    "docs:slide:conv": "marp ./docs/slide/assets/md/PITCHME.md",
-    "docs:slide:preview": "npx marp -p -w ./docs/slide/assets/md/"
+    "docs:slide:build": "marp docs/slides/PITCHME.md -o docs/slides/index.html",
+    "docs:slide:deploy": "cpx 'docs/slide/PITCHME.md' ./",
+    "docs:slide:proxy": "browser-sync start --config docs/slides/bs-config.js",
+    "docs:slide:watch": "marp -s docs/slides",
+    "docs:slide:preview": "marp -p -w docs/slides"
   },
   "repository": {
     "type": "git",
