@@ -67,3 +67,5 @@ typings/
 
 gradle
 .gradle
+
+dist
