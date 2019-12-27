@@ -10,7 +10,7 @@
 | ソフトウェア   | バージョン | 備考 |
 | :------------- | :--------- | :--- |
 | nodejs         | 10.16.3    |      |
-| ruby           | 2.6        |      |
+| ruby           | 2.5        |      |
 
 ## 構成
 
@@ -34,9 +34,24 @@ npx browser-sync init
 touch Procfile
 ```
 
+#### アプリケーションのセットアップ
+
+```bash
+npm install --save-dev mocha chai cypress cypress-file-upload
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/register @babel/polyfill babel-plugin-istanbul cross-env nyc webpack webpack-cli webpack-dev-server babel-loader css-loader html-webpack-plugin mini-css-extract-plugin html-loader copy-webpack-plugin
+npm install --save-dev now
+```
+
 **[⬆ back to top](#構成)**
 
 ### 配置
+
+```bash
+npx now login
+npm run deploy
+```
+
+[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/new/project?template=https://github.com/k2works/programing_excercise_2019)
 
 **[⬆ back to top](#構成)**
 
