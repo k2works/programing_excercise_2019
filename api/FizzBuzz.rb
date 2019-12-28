@@ -77,6 +77,8 @@ class FizzBuzzTest < Minitest::Test
 end
 
 class FizzBuzz
+  MAX_NUMBER = 100
+
   def self.generate(number)
     isFizz = number.modulo(3) == 0
     isBuzz = number.modulo(5) == 0
@@ -88,6 +90,6 @@ class FizzBuzz
   end
 
   def self.generateList
-    (1..100).map { |i| self.generate(i) }
+    (1..MAX_NUMBER).map { |i| self.generate(i) }
   end
 end
