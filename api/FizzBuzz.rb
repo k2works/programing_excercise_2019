@@ -15,7 +15,7 @@ require 'minitest/autorun'
   - [x] 2番目は文字列Fizzを返す
   - [x] 4番目は文字列Buzzを返す
   - [x] 14番目は文字列FizzBuzzを返す
-- [ ] プリントする
+- [x] プリントする
 =end
 
 class FizzBuzzTest < Minitest::Test
