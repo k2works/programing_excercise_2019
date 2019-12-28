@@ -9,9 +9,12 @@ require 'minitest/autorun'
   - [x] 3を渡したら文字列"Fizz"を返す
 - [x] 5 の倍数のときは｢Buzz｣と返す
 - [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
-- [ ] 1 から 100 までの数
+- [x] 1 から 100 までの数
   - [x] はじめは文字列1を返す
   - [x] 最後は文字列100を返す
+  - [x] 2番目は文字列Fizzを返す
+  - [x] 4番目は文字列Buzzを返す
+  - [x] 14番目は文字列FizzBuzzを返す
 - [ ] プリントする
 =end
 
@@ -54,8 +57,20 @@ class FizzBuzzTest < Minitest::Test
         assert_equal '1', @result.first
       end
 
-      def test_最後は文字列100を返す
-        assert_equal '100', @result.last
+      def test_最後は文字列Buzzを返す
+        assert_equal 'Buzz', @result.last
+      end
+
+      def test_2番目は文字列Fizzを返す
+        assert_equal 'Fizz', @result[2]
+      end
+
+      def test_4番目は文字列Buzzを返す
+        assert_equal 'Buzz', @result[4]
+      end
+
+      def test_14番目は文字列FizzBuzzを返す
+        assert_equal 'FizzBuzz', @result[14]
       end
     end
   end
@@ -77,7 +92,7 @@ class FizzBuzz
   def self.generateList
     result = []
     (1..100).each do |i|
-      result.push(i.to_s)
+      result.push(self.generate(i))
     end
     result
   end
