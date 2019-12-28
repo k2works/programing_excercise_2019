@@ -88,8 +88,6 @@ class FizzBuzz
   end
 
   def self.generateList
-    (1..100).map do |i|
-      self.generate(i)
-    end
+    (1..100).map { |i| self.generate(i) }
   end
 end
