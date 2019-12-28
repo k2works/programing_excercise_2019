@@ -271,6 +271,10 @@
       }
 
       class FizzBuzzService {
+        static get API_URL() {
+          return "https://programingexcercise2019.k2works.now.sh/api";
+        }
+
         generateList() {
           let fizzbuzz = new FizzBuzz();
           return fizzbuzz.generateList();
@@ -278,7 +282,7 @@
 
         generateListFromApi() {
           return new Promise((resolve, rejcet) => {
-            fetch("https://programingexcercise2019.k2works.now.sh/api")
+            fetch(FizzBuzzService.API_URL)
               .then(response => {
                 return response.json();
               })
