@@ -51,7 +51,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe '1から100までの数' do
       def setup
-        @result = FizzBuzz.generateList
+        @result = FizzBuzz.generate_list
       end
 
       def test_はじめは文字列1を返す
@@ -77,7 +77,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.generateJsonList())
+        result = JSON.parse(FizzBuzz.generate_json_list())
         assert_equal 'Fizz', result['data'][2]
       end
     end
@@ -97,11 +97,11 @@ class FizzBuzz
     number.to_s
   end
 
-  def self.generateList
+  def self.generate_list
     (1..MAX_NUMBER).map { |i| self.generate(i) }
   end
 
-  def self.generateJsonList
-    {data: self.generateList()}.to_json
+  def self.generate_json_list
+    {data: self.generate_list()}.to_json
   end
 end
