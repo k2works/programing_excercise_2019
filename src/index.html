@@ -252,10 +252,17 @@
         }
       }
 
+      class FizzBuzzService {
+        generateList() {
+          let fizzbuzz = new FizzBuzz();
+          return fizzbuzz.generateList();
+        }
+      }
+
       class FizzBuzzView {
         constructor() {
-          let fizzbuzz = new FizzBuzz();
-          this._list = fizzbuzz.generateList();
+          let service = new FizzBuzzService();
+          this._list = service.generateList();
         }
 
         createTable() {
