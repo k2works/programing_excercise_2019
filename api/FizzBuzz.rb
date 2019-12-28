@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'json'
 
 # TODOリスト
 =begin
@@ -73,6 +74,13 @@ class FizzBuzzTest < Minitest::Test
         assert_equal 'FizzBuzz', @result[14]
       end
     end
+
+    describe 'プリントする' do
+      def test_json形式でFizzBuzzListを返す
+        result = JSON.parse(FizzBuzz.generateJsonList())
+        assert_equal 'Fizz', result['data'][2]
+      end
+    end
   end
 end
 
@@ -91,5 +99,9 @@ class FizzBuzz
 
   def self.generateList
     (1..MAX_NUMBER).map { |i| self.generate(i) }
+  end
+
+  def self.generateJsonList
+    {data: self.generateList()}.to_json
   end
 end

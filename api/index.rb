@@ -3,7 +3,7 @@ require_relative './FizzBuzz.rb'
 
 Handler = Proc.new do |req, res|
     res.status = 200
+    res['Access-Control-Allow-Origin'] = '*'
     res['Content-Type'] = 'text/plain'
-    messag = FizzBuzz.generateList
-    res.body = Cowsay.say(messag.to_s, 'cow')
+    res.body = FizzBuzz.generateJsonList
 end

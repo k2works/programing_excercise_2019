@@ -223,6 +223,24 @@
         });
       });
 
+      suite("FizzBuzzServiceTest", () => {
+        let service;
+        setup("前準備", () => {
+          service = new FizzBuzzService();
+        });
+
+        test("FizzBuzzメソッドを呼び出す", () => {
+          const result = service.generateList();
+          assert.equal(result[2], "Fizz");
+        });
+
+        test("Apiサービスを呼び出す", () => {
+          return service.generateListFromApi().then(data => {
+            assert.equal(data[2], "Fizz");
+          });
+        });
+      });
+
       class FizzBuzz {
         static get FIZZ() {
           return "Fizz";
@@ -257,26 +275,41 @@
           let fizzbuzz = new FizzBuzz();
           return fizzbuzz.generateList();
         }
+
+        generateListFromApi() {
+          return new Promise((resolve, rejcet) => {
+            fetch("https://programingexcercise2019.k2works.now.sh/api")
+              .then(response => {
+                return response.json();
+              })
+              .then(json => {
+                console.log(JSON.stringify(json));
+                resolve(json.data);
+              })
+              .catch(err => {
+                console.log(err);
+                rejcet(err);
+              });
+          });
+        }
       }
 
       class FizzBuzzView {
         constructor() {
-          let service = new FizzBuzzService();
-          this._list = service.generateList();
+          this._service = new FizzBuzzService();
         }
 
-        createTable() {
+        createTable(data) {
           return (() => {
             const th = (() => {
               return [...Array(10).keys()].map(i => `<th>${i + 1}</th>`);
             })();
 
             const row = (() => {
-              let fizzbuzz = new FizzBuzz();
               let result = [];
               let row = 0;
               let col = [];
-              this._list.forEach((v, k) => {
+              data.forEach((v, k) => {
                 if ((k + 1) % 10 === 0) {
                   col.push(`<td>${v}</t>`);
                   result[row++] = col;
@@ -321,9 +354,11 @@
         }
 
         render() {
-          document.querySelector(
-            "#app-fizzbuzz"
-          ).innerHTML = this.createTable();
+          this._service.generateListFromApi().then(data => {
+            document.querySelector(
+              "#app-fizzbuzz"
+            ).innerHTML = this.createTable(data);
+          });
         }
       }
 
