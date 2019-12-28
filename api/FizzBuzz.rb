@@ -88,10 +88,8 @@ class FizzBuzz
   end
 
   def self.generateList
-    result = []
-    (1..100).each do |i|
-      result.push(self.generate(i))
+    (1..100).map do |i|
+      self.generate(i)
     end
-    result
   end
 end
