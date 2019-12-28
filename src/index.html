@@ -211,15 +211,15 @@
         });
 
         test("3で割り切れる場合はFizzをプリントする", () => {
-          assert.equal("Fizz", FizzBuzz.fizzBuzz(3));
+          assert.equal("Fizz", FizzBuzz.generate(3));
         });
 
         test("5で割り切れる場合はBuzzをプリントする", () => {
-          assert.equal("Buzz", FizzBuzz.fizzBuzz(5));
+          assert.equal("Buzz", FizzBuzz.generate(5));
         });
 
         test("15で割り切れる場合はFizzBuzzをプリントする", () => {
-          assert.equal("FizzBuzz", FizzBuzz.fizzBuzz(15));
+          assert.equal("FizzBuzz", FizzBuzz.generate(15));
         });
       });
 
@@ -238,10 +238,10 @@
           // 配列が0から始まるので1を足して1から始まるようにしている
           return [...Array(FizzBuzz.MAX_NUMBER + 1).keys()]
             .slice(1)
-            .map(FizzBuzz.fizzBuzz);
+            .map(FizzBuzz.generate);
         }
 
-        static fizzBuzz(number) {
+        static generate(number) {
           const isFizz = number % 3 === 0;
           const isBuzz = number % 5 === 0;
 
@@ -259,7 +259,7 @@
           })();
 
           const row = (() => {
-            let fizzbuzz = new FizzBuzz();
+            let fizzbuzz = new generate();
             let result = [];
             let row = 0;
             let col = [];
