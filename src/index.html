@@ -202,7 +202,7 @@
         });
 
         test("1から100までをプリントする、ただし3で割り切れる場合はFizzを5で割り切れる場合はBuzzを15で割り切れる場合はFizzBuzzをプリントする", () => {
-          let list = fizzBuzz.generateFizzBuzzList();
+          let list = fizzBuzz.generateList();
           assert.equal(1, list[0]);
           assert.equal("Fizz", list[2]);
           assert.equal("Buzz", list[4]);
@@ -234,7 +234,7 @@
           return 100;
         }
 
-        generateFizzBuzzList() {
+        generateList() {
           // 配列が0から始まるので1を足して1から始まるようにしている
           return [...Array(FizzBuzz.MAX_NUMBER + 1).keys()]
             .slice(1)
@@ -259,11 +259,11 @@
           })();
 
           const row = (() => {
-            let fizzbuzz = new generate();
+            let fizzbuzz = new FizzBuzz();
             let result = [];
             let row = 0;
             let col = [];
-            fizzbuzz.generateFizzBuzzList().forEach((v, k) => {
+            fizzbuzz.generateList().forEach((v, k) => {
               if ((k + 1) % 10 === 0) {
                 col.push(`<td>${v}</t>`);
                 result[row++] = col;
