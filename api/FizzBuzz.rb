@@ -79,13 +79,11 @@ end
 class FizzBuzz
   def self.generate(number)
     result = number.to_s
-    if number.modulo(3) == 0 and number.modulo(5) == 0
-      result = 'FizzBuzz'
-    elsif number.modulo(3) == 0
-      result = 'Fizz'
-    elsif number.modulo(5) == 0
-      result = 'Buzz'
-    end
+
+    return 'FizzBuzz' if number.modulo(3) == 0 and number.modulo(5) == 0
+    return 'Fizz' if number.modulo(3) == 0
+    return 'Buzz' if number.modulo(5) == 0
+
     result
   end
 
