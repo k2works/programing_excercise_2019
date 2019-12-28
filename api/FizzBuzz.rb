@@ -10,6 +10,8 @@ require 'minitest/autorun'
 - [x] 5 の倍数のときは｢Buzz｣と返す
 - [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
 - [ ] 1 から 100 までの数
+  - [x] はじめは文字列1を返す
+  - [x] 最後は文字列100を返す
 - [ ] プリントする
 =end
 
@@ -42,6 +44,20 @@ class FizzBuzzTest < Minitest::Test
         assert_equal '1', @fizzbuzz.generate(1)
       end
     end
+
+    describe '1から100までの数' do
+      def setup
+        @result = FizzBuzz.generateList
+      end
+
+      def test_はじめは文字列1を返す
+        assert_equal '1', @result.first
+      end
+
+      def test_最後は文字列100を返す
+        assert_equal '100', @result.last
+      end
+    end
   end
 end
 
@@ -54,6 +70,14 @@ class FizzBuzz
       result = 'Fizz'
     elsif number.modulo(5) == 0
       result = 'Buzz'
+    end
+    result
+  end
+
+  def self.generateList
+    result = []
+    (1..100).each do |i|
+      result.push(i.to_s)
     end
     result
   end
