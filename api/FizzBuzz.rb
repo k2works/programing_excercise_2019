@@ -88,7 +88,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ1の場合' do
       def setup
-        @fizzbuzz = FizzBuzz
+        @fizzbuzz = FizzBuzz.create(1)
       end
 
       describe '三の倍数の場合' do
@@ -118,7 +118,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ2の場合' do
       def setup
-        @fizzbuzz = FizzBuzz
+        @fizzbuzz = FizzBuzz.create(2)
       end
 
       describe '三の倍数の場合' do
@@ -148,7 +148,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ3の場合' do
       def setup
-        @fizzbuzz = FizzBuzz
+        @fizzbuzz = FizzBuzz.create(3)
       end
 
       describe '三の倍数の場合' do
@@ -195,6 +195,19 @@ end
 class FizzBuzz
   MAX_NUMBER = 100
 
+  def self.create(type)
+    case type
+    when 1
+      FizzBuzzType01.new
+    when 2
+      FizzBuzzType02.new
+    when 3
+      FizzBuzzType03.new
+    else
+      raise '該当するタイプは存在しません'
+    end
+  end
+
   def self.generate(number, type)
     isFizz = number.modulo(3) == 0
     isBuzz = number.modulo(5) == 0
@@ -222,4 +235,13 @@ class FizzBuzz
   def self.generate_json_list
     {data: self.generate_list()}.to_json
   end
+end
+
+class FizzBuzzType01
+end
+
+class FizzBuzzType02
+end
+
+class FizzBuzzType03
 end
