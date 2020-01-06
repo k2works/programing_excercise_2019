@@ -47,8 +47,8 @@ require 'json'
     - [x] 5を渡したら文字列"5"を返す
   - [x] 3 と 5 両方の倍数の場合には｢FizzBuzz｣と返す
     - [x] 15を渡したら文字列"FizzBuzz"を返す
-- [ ] それ以外のタイプの場合
-  - [ ] 例外を返す
+- [x] それ以外のタイプの場合
+  - [x] 例外を返す
 =end
 
 class FizzBuzzTest < Minitest::Test
