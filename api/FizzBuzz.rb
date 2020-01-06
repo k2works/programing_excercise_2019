@@ -55,7 +55,7 @@ class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
     describe '1から100までの数' do
       def setup
-        @fizzbuzz = FizzBuzz.new(1)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.new)
         @result = @fizzbuzz.generate_list
       end
 
@@ -82,14 +82,14 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.new(1).generate_json_list)
+        result = JSON.parse(FizzBuzz.new(FizzBuzzType01.new).generate_json_list)
         assert_equal 'Fizz', result['data'][2]
       end
     end
 
     describe 'タイプ1の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.create(1)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.new)
       end
 
       describe '三の倍数の場合' do
@@ -119,7 +119,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ2の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.create(2)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType02.new)
       end
 
       describe '三の倍数の場合' do
@@ -149,7 +149,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ3の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.create(3)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType03.new)
       end
 
       describe '三の倍数の場合' do
@@ -185,7 +185,7 @@ class FizzBuzzTest < Minitest::Test
       def test_例外を返す
         e =
           assert_raises RuntimeError do
-            @fizzbuzz.new(4)
+            @fizzbuzz.create(4)
           end
 
         assert_equal '該当するタイプは存在しません', e.message
@@ -198,7 +198,7 @@ class FizzBuzz
   MAX_NUMBER = 100
 
   def initialize(type)
-    @type = FizzBuzz.create(type)
+    @type = type
   end
 
   def self.create(type)
@@ -212,6 +212,10 @@ class FizzBuzz
     else
       raise '該当するタイプは存在しません'
     end
+  end
+
+  def generate(number)
+    @type.generate(number)
   end
 
   def generate_list
