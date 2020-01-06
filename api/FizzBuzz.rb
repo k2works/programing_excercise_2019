@@ -82,7 +82,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.new(1).generate_json_list())
+        result = JSON.parse(FizzBuzz.new(1).generate_json_list)
         assert_equal 'Fizz', result['data'][2]
       end
     end
@@ -183,9 +183,10 @@ class FizzBuzzTest < Minitest::Test
       end
 
       def test_例外を返す
-        e = assert_raises RuntimeError do
-          @fizzbuzz.new(4)
-        end
+        e =
+          assert_raises RuntimeError do
+            @fizzbuzz.new(4)
+          end
 
         assert_equal '該当するタイプは存在しません', e.message
       end
@@ -218,7 +219,7 @@ class FizzBuzz
   end
 
   def generate_json_list
-    {data: generate_list()}.to_json
+    { data: generate_list }.to_json
   end
 end
 
