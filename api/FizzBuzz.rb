@@ -83,8 +83,8 @@ class FizzBuzzTest < Minitest::Test
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
         list =
-          FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
-            .generate_json_list
+          FizzBuzzJsonValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+            .execute(100)
         result = JSON.parse(list)
         assert_equal 'Fizz', result['data'][2]['value']
       end
@@ -198,18 +198,18 @@ class FizzBuzzTest < Minitest::Test
 
   describe 'FizzBuzzValue' do
     def setup
-      @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+      @fizzbuzz = FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
     end
 
     def test_同じ値
-      value1 = @fizzbuzz.generate(1)
-      value2 = @fizzbuzz.generate(1)
+      value1 = @fizzbuzz.execute(1)
+      value2 = @fizzbuzz.execute(1)
 
       assert value1.eql?(value2)
     end
 
     def test_to_string
-      value = @fizzbuzz.generate(3)
+      value = @fizzbuzz.execute(3)
 
       assert_equal '3:Fizz', value.to_s
     end
@@ -217,36 +217,16 @@ class FizzBuzzTest < Minitest::Test
 
   describe 'FizzBuzzList' do
     def setup
-      @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+      @fizzbuzz = FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
     end
 
     def test_新しいインスタンスが作られる
-      list1 = FizzBuzzList.new(@fizzbuzz.generate_list)
-      list2 = list1.add(@fizzbuzz.generate_list)
+      list1 = FizzBuzzList.new(@fizzbuzz.execute(100))
+      list2 = list1.add(@fizzbuzz.execute(100))
 
       assert_equal 100, list1.value.count
       assert_equal 200, list2.value.count
     end
-  end
-end
-
-class FizzBuzz
-  MAX_NUMBER = 100
-
-  def initialize(type)
-    @type = type
-  end
-
-  def generate(number)
-    @type.generate(number)
-  end
-
-  def generate_list
-    (1..MAX_NUMBER).map { |i| @type.generate(i) }
-  end
-
-  def generate_json_list
-    { data: generate_list }.to_json
   end
 end
 
@@ -368,5 +348,16 @@ class FizzBuzzValueListCommand < FizzBuzzCommand
 
   def execute(number)
     (1..number).map { |i| @type.generate(i) }
+  end
+end
+
+class FizzBuzzJsonValueListCommand < FizzBuzzCommand
+  def initialize(type)
+    @type = type
+  end
+
+  def execute(number)
+    command = FizzBuzzValueListCommand.new(@type)
+    {data: command.execute(number)}.to_json
   end
 end
