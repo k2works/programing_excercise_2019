@@ -223,30 +223,34 @@ class FizzBuzz
   end
 end
 
-class FizzBuzzType01
-  def generate(number)
-    isFizz = number.modulo(3) == 0
-    isBuzz = number.modulo(5) == 0
+class FizzBuzzType
+  def isFizz(number)
+    number.modulo(3) == 0
+  end
 
-    return 'FizzBuzz' if isFizz && isBuzz
-    return 'Fizz' if isFizz
-    return 'Buzz' if isBuzz
+  def isBuzz(number)
+    number.modulo(5) == 0
+  end
+end
+
+class FizzBuzzType01 < FizzBuzzType
+  def generate(number)
+    return 'FizzBuzz' if isFizz(number) && isBuzz(number)
+    return 'Fizz' if isFizz(number)
+    return 'Buzz' if isBuzz(number)
     number.to_s
   end
 end
 
-class FizzBuzzType02
+class FizzBuzzType02 < FizzBuzzType
   def generate(number)
     number.to_s
   end
 end
 
-class FizzBuzzType03
+class FizzBuzzType03 < FizzBuzzType
   def generate(number)
-    isFizz = number.modulo(3) == 0
-    isBuzz = number.modulo(5) == 0
-
-    return 'FizzBuzz' if isFizz && isBuzz
+    return 'FizzBuzz' if isFizz(number) && isBuzz(number)
     number.to_s
   end
 end
