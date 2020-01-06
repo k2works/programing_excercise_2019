@@ -53,46 +53,10 @@ require 'json'
 
 class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
-    describe '1から100までの数' do
-      def setup
-        @fizzbuzz = FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
-        @result = @fizzbuzz.execute(100)
-      end
-
-      def test_はじめは文字列1を返す
-        assert_equal '1', @result.first.value
-      end
-
-      def test_最後は文字列Buzzを返す
-        assert_equal 'Buzz', @result.last.value
-      end
-
-      def test_2番目は文字列Fizzを返す
-        assert_equal 'Fizz', @result[2].value
-      end
-
-      def test_4番目は文字列Buzzを返す
-        assert_equal 'Buzz', @result[4].value
-      end
-
-      def test_14番目は文字列FizzBuzzを返す
-        assert_equal 'FizzBuzz', @result[14].value
-      end
-    end
-
-    describe 'プリントする' do
-      def test_json形式でFizzBuzzListを返す
-        list =
-          FizzBuzzJsonValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
-            .execute(100)
-        result = JSON.parse(list)
-        assert_equal 'Fizz', result['data'][2]['value']
-      end
-    end
-
     describe 'タイプ1の場合' do
       def setup
-        @fizzbuzz = FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+        @fizzbuzz =
+          FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
       end
 
       describe '三の倍数の場合' do
@@ -118,11 +82,54 @@ class FizzBuzzTest < Minitest::Test
           assert_equal '1', @fizzbuzz.execute(1).value
         end
       end
+
+      describe '1から100までの数' do
+        def setup
+          @fizzbuzz =
+            FizzBuzzValueListCommand.new(
+              FizzBuzzType.create(FizzBuzzType::TYPE_01)
+            )
+          @result = @fizzbuzz.execute(100)
+        end
+
+        def test_はじめは文字列1を返す
+          assert_equal '1', @result.first.value
+        end
+
+        def test_最後は文字列Buzzを返す
+          assert_equal 'Buzz', @result.last.value
+        end
+
+        def test_2番目は文字列Fizzを返す
+          assert_equal 'Fizz', @result[2].value
+        end
+
+        def test_4番目は文字列Buzzを返す
+          assert_equal 'Buzz', @result[4].value
+        end
+
+        def test_14番目は文字列FizzBuzzを返す
+          assert_equal 'FizzBuzz', @result[14].value
+        end
+      end
+
+      describe 'プリントする' do
+        def test_json形式でFizzBuzzListを返す
+          list =
+            FizzBuzzJsonValueListCommand.new(
+              FizzBuzzType.create(FizzBuzzType::TYPE_01)
+            )
+              .execute(100)
+          result = JSON.parse(list)
+          assert_equal 'Fizz', result['data'][2]['value']
+        end
+      end
     end
 
     describe 'タイプ2の場合' do
       def setup
-        @fizzbuzz = FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_02))
+        @fizzbuzz =
+          FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_02))
       end
 
       describe '三の倍数の場合' do
@@ -152,7 +159,8 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ3の場合' do
       def setup
-        @fizzbuzz = FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_03))
+        @fizzbuzz =
+          FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_03))
       end
 
       describe '三の倍数の場合' do
@@ -198,7 +206,8 @@ class FizzBuzzTest < Minitest::Test
 
   describe 'FizzBuzzValue' do
     def setup
-      @fizzbuzz = FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+      @fizzbuzz =
+        FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
     end
 
     def test_同じ値
@@ -217,7 +226,8 @@ class FizzBuzzTest < Minitest::Test
 
   describe 'FizzBuzzList' do
     def setup
-      @fizzbuzz = FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+      @fizzbuzz =
+        FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
     end
 
     def test_新しいインスタンスが作られる
@@ -327,8 +337,7 @@ class FizzBuzzList
 end
 
 class FizzBuzzCommand
-  def execute
-  end
+  def execute; end
 end
 
 class FizzBuzzValueCommand < FizzBuzzCommand
@@ -358,6 +367,6 @@ class FizzBuzzJsonValueListCommand < FizzBuzzCommand
 
   def execute(number)
     command = FizzBuzzValueListCommand.new(@type)
-    {data: command.execute(number)}.to_json
+    { data: command.execute(number) }.to_json
   end
 end
