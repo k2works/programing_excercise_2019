@@ -55,7 +55,8 @@ class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
     describe '1から100までの数' do
       def setup
-        @result = FizzBuzz.generate_list
+        @fizzbuzz = FizzBuzz.new(1)
+        @result = @fizzbuzz.generate_list
       end
 
       def test_はじめは文字列1を返す
@@ -81,7 +82,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.generate_json_list())
+        result = JSON.parse(FizzBuzz.new(1).generate_json_list())
         assert_equal 'Fizz', result['data'][2]
       end
     end
@@ -183,7 +184,7 @@ class FizzBuzzTest < Minitest::Test
 
       def test_例外を返す
         e = assert_raises RuntimeError do
-          @fizzbuzz.generate(1, 4)
+          @fizzbuzz.new(4)
         end
 
         assert_equal '該当するタイプは存在しません', e.message
@@ -194,6 +195,10 @@ end
 
 class FizzBuzz
   MAX_NUMBER = 100
+
+  def initialize(type)
+    @type = FizzBuzz.create(type)
+  end
 
   def self.create(type)
     case type
@@ -208,32 +213,12 @@ class FizzBuzz
     end
   end
 
-  def self.generate(number, type)
-    isFizz = number.modulo(3) == 0
-    isBuzz = number.modulo(5) == 0
-
-    case type
-    when 1
-      return 'FizzBuzz' if isFizz && isBuzz
-      return 'Fizz' if isFizz
-      return 'Buzz' if isBuzz
-      number.to_s
-    when 2
-      number.to_s
-    when 3
-      return 'FizzBuzz' if isFizz && isBuzz
-      number.to_s
-    else
-      raise '該当するタイプは存在しません'
-    end
+  def generate_list
+    (1..MAX_NUMBER).map { |i| @type.generate(i) }
   end
 
-  def self.generate_list
-    (1..MAX_NUMBER).map { |i| self.generate(i, 1) }
-  end
-
-  def self.generate_json_list
-    {data: self.generate_list()}.to_json
+  def generate_json_list
+    {data: generate_list()}.to_json
   end
 end
 
