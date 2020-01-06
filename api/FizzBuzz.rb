@@ -60,30 +60,33 @@ class FizzBuzzTest < Minitest::Test
       end
 
       def test_はじめは文字列1を返す
-        assert_equal '1', @result.first
+        assert_equal '1', @result.first.value
       end
 
       def test_最後は文字列Buzzを返す
-        assert_equal 'Buzz', @result.last
+        assert_equal 'Buzz', @result.last.value
       end
 
       def test_2番目は文字列Fizzを返す
-        assert_equal 'Fizz', @result[2]
+        assert_equal 'Fizz', @result[2].value
       end
 
       def test_4番目は文字列Buzzを返す
-        assert_equal 'Buzz', @result[4]
+        assert_equal 'Buzz', @result[4].value
       end
 
       def test_14番目は文字列FizzBuzzを返す
-        assert_equal 'FizzBuzz', @result[14]
+        assert_equal 'FizzBuzz', @result[14].value
       end
     end
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).generate_json_list)
-        assert_equal 'Fizz', result['data'][2]
+        list =
+          FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+            .generate_json_list
+        result = JSON.parse(list)
+        assert_equal 'Fizz', result['data'][2]['value']
       end
     end
 
@@ -94,25 +97,25 @@ class FizzBuzzTest < Minitest::Test
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列Fizzを返す
-          assert_equal 'Fizz', @fizzbuzz.generate(3)
+          assert_equal 'Fizz', @fizzbuzz.generate(3).value
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列Buzzを返す
-          assert_equal 'Buzz', @fizzbuzz.generate(5)
+          assert_equal 'Buzz', @fizzbuzz.generate(5).value
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列FizzBuzzを返す
-          assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
+          assert_equal 'FizzBuzz', @fizzbuzz.generate(15).value
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.generate(1)
+          assert_equal '1', @fizzbuzz.generate(1).value
         end
       end
     end
@@ -124,25 +127,25 @@ class FizzBuzzTest < Minitest::Test
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列3を返す
-          assert_equal '3', @fizzbuzz.generate(3)
+          assert_equal '3', @fizzbuzz.generate(3).value
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列5を返す
-          assert_equal '5', @fizzbuzz.generate(5)
+          assert_equal '5', @fizzbuzz.generate(5).value
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列15を返す
-          assert_equal '15', @fizzbuzz.generate(15)
+          assert_equal '15', @fizzbuzz.generate(15).value
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.generate(1)
+          assert_equal '1', @fizzbuzz.generate(1).value
         end
       end
     end
@@ -154,25 +157,25 @@ class FizzBuzzTest < Minitest::Test
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列3を返す
-          assert_equal '3', @fizzbuzz.generate(3)
+          assert_equal '3', @fizzbuzz.generate(3).value
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列5を返す
-          assert_equal '5', @fizzbuzz.generate(5)
+          assert_equal '5', @fizzbuzz.generate(5).value
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列FizzBuzzを返す
-          assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
+          assert_equal 'FizzBuzz', @fizzbuzz.generate(15).value
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.generate(1)
+          assert_equal '1', @fizzbuzz.generate(1).value
         end
       end
     end
@@ -190,6 +193,25 @@ class FizzBuzzTest < Minitest::Test
 
         assert_equal '該当するタイプは存在しません', e.message
       end
+    end
+  end
+
+  describe 'FizzBuzzValue' do
+    def setup
+      @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+    end
+
+    def test_同じ値
+      value1 = @fizzbuzz.generate(1)
+      value2 = @fizzbuzz.generate(1)
+
+      assert value1.eql?(value2)
+    end
+
+    def test_to_string
+      value = @fizzbuzz.generate(3)
+
+      assert_equal '3:Fizz', value.to_s
     end
   end
 end
@@ -243,22 +265,53 @@ end
 
 class FizzBuzzType01 < FizzBuzzType
   def generate(number)
-    return 'FizzBuzz' if isFizz(number) && isBuzz(number)
-    return 'Fizz' if isFizz(number)
-    return 'Buzz' if isBuzz(number)
-    number.to_s
+    if isFizz(number) && isBuzz(number)
+      return FizzBuzzValue.new(number, 'FizzBuzz')
+    end
+    return FizzBuzzValue.new(number, 'Fizz') if isFizz(number)
+    return FizzBuzzValue.new(number, 'Buzz') if isBuzz(number)
+    FizzBuzzValue.new(number, number.to_s)
   end
 end
 
 class FizzBuzzType02 < FizzBuzzType
   def generate(number)
-    number.to_s
+    FizzBuzzValue.new(number, number.to_s)
   end
 end
 
 class FizzBuzzType03 < FizzBuzzType
   def generate(number)
-    return 'FizzBuzz' if isFizz(number) && isBuzz(number)
-    number.to_s
+    if isFizz(number) && isBuzz(number)
+      return FizzBuzzValue.new(number, 'FizzBuzz')
+    end
+    FizzBuzzValue.new(number, number.to_s)
   end
+end
+
+class FizzBuzzValue
+  attr_reader :number, :value
+
+  def initialize(number, value)
+    @number = number
+    @value = value
+  end
+
+  def as_json(options = {})
+    { number: @number, value: @value }
+  end
+
+  def to_json(*options)
+    as_json(*options).to_json(*options)
+  end
+
+  def to_s
+    "#{@number}:#{@value}"
+  end
+
+  def ==(other)
+    @number == other.number && @value == other.value
+  end
+
+  alias eql? ==
 end
