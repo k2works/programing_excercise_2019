@@ -51,34 +51,6 @@ require 'json'
 
 class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
-    def setup
-      @fizzbuzz = FizzBuzz
-    end
-
-    describe '三の倍数の場合' do
-      def test_3を渡したら文字列Fizzを返す
-        assert_equal 'Fizz', @fizzbuzz.generate(3)
-      end
-    end
-
-    describe '五の倍数の場合' do
-      def test_5を渡したら文字列Buzzを返す
-        assert_equal 'Buzz', @fizzbuzz.generate(5)
-      end
-    end
-
-    describe '三と五の倍数の場合' do
-      def test_15を渡したら文字列FizzBuzzを返す
-        assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
-      end
-    end
-
-    describe 'その他の場合' do
-      def test_1を渡したら文字列1を返す
-        assert_equal '1', @fizzbuzz.generate(1)
-      end
-    end
-
     describe '1から100までの数' do
       def setup
         @result = FizzBuzz.generate_list
@@ -113,9 +85,31 @@ class FizzBuzzTest < Minitest::Test
     end
 
     describe 'タイプ1の場合' do
-      describe '数を文字列にして返す' do
+      def setup
+        @fizzbuzz = FizzBuzz
+      end
+
+      describe '三の倍数の場合' do
+        def test_3を渡したら文字列Fizzを返す
+          assert_equal 'Fizz', @fizzbuzz.generate(3, 1)
+        end
+      end
+
+      describe '五の倍数の場合' do
+        def test_5を渡したら文字列Buzzを返す
+          assert_equal 'Buzz', @fizzbuzz.generate(5, 1)
+        end
+      end
+
+      describe '三と五の倍数の場合' do
+        def test_15を渡したら文字列FizzBuzzを返す
+          assert_equal 'FizzBuzz', @fizzbuzz.generate(15, 1)
+        end
+      end
+
+      describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', FizzBuzz.generate(1, 1)
+          assert_equal '1', @fizzbuzz.generate(1, 1)
         end
       end
     end
@@ -125,7 +119,7 @@ end
 class FizzBuzz
   MAX_NUMBER = 100
 
-  def self.generate(number, type = 1)
+  def self.generate(number, type)
     case type
     when 1
       isFizz = number.modulo(3) == 0
@@ -139,7 +133,7 @@ class FizzBuzz
   end
 
   def self.generate_list
-    (1..MAX_NUMBER).map { |i| self.generate(i) }
+    (1..MAX_NUMBER).map { |i| self.generate(i, 1) }
   end
 
   def self.generate_json_list
