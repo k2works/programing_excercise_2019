@@ -180,11 +180,11 @@ class FizzBuzz
   MAX_NUMBER = 100
 
   def self.generate(number, type)
+    isFizz = number.modulo(3) == 0
+    isBuzz = number.modulo(5) == 0
+
     case type
     when 1
-      isFizz = number.modulo(3) == 0
-      isBuzz = number.modulo(5) == 0
-
       return 'FizzBuzz' if isFizz && isBuzz
       return 'Fizz' if isFizz
       return 'Buzz' if isBuzz
@@ -192,9 +192,6 @@ class FizzBuzz
     when 2
       number.to_s
     when 3
-      isFizz = number.modulo(3) == 0
-      isBuzz = number.modulo(5) == 0
-
       return 'FizzBuzz' if isFizz && isBuzz
       number.to_s
     end
