@@ -93,25 +93,25 @@ class FizzBuzzTest < Minitest::Test
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列Fizzを返す
-          assert_equal 'Fizz', @fizzbuzz.generate(3, 1)
+          assert_equal 'Fizz', @fizzbuzz.generate(3)
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列Buzzを返す
-          assert_equal 'Buzz', @fizzbuzz.generate(5, 1)
+          assert_equal 'Buzz', @fizzbuzz.generate(5)
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列FizzBuzzを返す
-          assert_equal 'FizzBuzz', @fizzbuzz.generate(15, 1)
+          assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.generate(1, 1)
+          assert_equal '1', @fizzbuzz.generate(1)
         end
       end
     end
@@ -238,6 +238,15 @@ class FizzBuzz
 end
 
 class FizzBuzzType01
+  def generate(number)
+    isFizz = number.modulo(3) == 0
+    isBuzz = number.modulo(5) == 0
+
+    return 'FizzBuzz' if isFizz && isBuzz
+    return 'Fizz' if isFizz
+    return 'Buzz' if isBuzz
+    number.to_s
+  end
 end
 
 class FizzBuzzType02
