@@ -55,7 +55,7 @@ class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
     describe '1から100までの数' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.new)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(1))
         @result = @fizzbuzz.generate_list
       end
 
@@ -89,7 +89,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ1の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.new)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.create(1))
       end
 
       describe '三の倍数の場合' do
@@ -119,7 +119,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ2の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType02.new)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(2))
       end
 
       describe '三の倍数の場合' do
@@ -149,7 +149,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ3の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType03.new)
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(3))
       end
 
       describe '三の倍数の場合' do
@@ -179,7 +179,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'それ以外のタイプの場合' do
       def setup
-        @fizzbuzz = FizzBuzz
+        @fizzbuzz = FizzBuzzType
       end
 
       def test_例外を返す
@@ -201,19 +201,6 @@ class FizzBuzz
     @type = type
   end
 
-  def self.create(type)
-    case type
-    when 1
-      FizzBuzzType01.new
-    when 2
-      FizzBuzzType02.new
-    when 3
-      FizzBuzzType03.new
-    else
-      raise '該当するタイプは存在しません'
-    end
-  end
-
   def generate(number)
     @type.generate(number)
   end
@@ -228,6 +215,19 @@ class FizzBuzz
 end
 
 class FizzBuzzType
+  def self.create(type)
+    case type
+    when 1
+      FizzBuzzType01.new
+    when 2
+      FizzBuzzType02.new
+    when 3
+      FizzBuzzType03.new
+    else
+      raise '該当するタイプは存在しません'
+    end
+  end
+
   def isFizz(number)
     number.modulo(3) == 0
   end
