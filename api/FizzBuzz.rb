@@ -55,7 +55,7 @@ class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
     describe '1から100までの数' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(1))
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
         @result = @fizzbuzz.generate_list
       end
 
@@ -82,14 +82,14 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'プリントする' do
       def test_json形式でFizzBuzzListを返す
-        result = JSON.parse(FizzBuzz.new(FizzBuzzType01.new).generate_json_list)
+        result = JSON.parse(FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).generate_json_list)
         assert_equal 'Fizz', result['data'][2]
       end
     end
 
     describe 'タイプ1の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType01.create(1))
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
       end
 
       describe '三の倍数の場合' do
@@ -119,7 +119,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ2の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(2))
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_02))
       end
 
       describe '三の倍数の場合' do
@@ -149,7 +149,7 @@ class FizzBuzzTest < Minitest::Test
 
     describe 'タイプ3の場合' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(3))
+        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_03))
       end
 
       describe '三の倍数の場合' do
@@ -215,13 +215,17 @@ class FizzBuzz
 end
 
 class FizzBuzzType
+  TYPE_01 = 1
+  TYPE_02 = 2
+  TYPE_03 = 3
+
   def self.create(type)
     case type
-    when 1
+    when TYPE_01
       FizzBuzzType01.new
-    when 2
+    when TYPE_02
       FizzBuzzType02.new
-    when 3
+    when TYPE_03
       FizzBuzzType03.new
     else
       raise '該当するタイプは存在しません'
