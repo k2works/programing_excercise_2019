@@ -214,6 +214,20 @@ class FizzBuzzTest < Minitest::Test
       assert_equal '3:Fizz', value.to_s
     end
   end
+
+  describe 'FizzBuzzList' do
+    def setup
+      @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+    end
+
+    def test_新しいインスタンスが作られる
+      list1 = FizzBuzzList.new(@fizzbuzz.generate_list)
+      list2 = list1.add(@fizzbuzz.generate_list)
+
+      assert_equal 100, list1.value.count
+      assert_equal 200, list2.value.count
+    end
+  end
 end
 
 class FizzBuzz
@@ -314,4 +328,20 @@ class FizzBuzzValue
   end
 
   alias eql? ==
+end
+
+class FizzBuzzList
+  attr_reader :value
+
+  def initialize(list)
+    @value = list
+  end
+
+  def to_s
+    @value.to_s
+  end
+
+  def add(value)
+    FizzBuzzList.new(@value + value)
+  end
 end
