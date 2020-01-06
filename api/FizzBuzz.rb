@@ -83,15 +83,19 @@ class FizzBuzzTest < Minitest::Test
         end
 
         def test_値は正の値のみ許可する
-          assert_raises Assertions::AssertionError do
+          e = assert_raises RuntimeError do
             FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).execute(-1)
           end
+
+          assert_equal '値は正の値のみ有効です', e.message
         end
 
         def test_100より多い数を許可しない
-          assert_raises Assertions::AssertionError do
+          e = assert_raises RuntimeError do
             FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).execute(101)
           end
+
+          assert_equal '100件より多く保持できません', e.message
         end
       end
 
@@ -305,20 +309,11 @@ class FizzBuzzType03 < FizzBuzzType
   end
 end
 
-module Assertions
-  class AssertionError < StandardError; end
-
-  def assert(&condition)
-    raise AssertionError.new("Assertion Failed") unless condition.call
-  end
-end
-
 class FizzBuzzValue
-  include Assertions
   attr_reader :number, :value
 
   def initialize(number, value)
-    assert { number >= 0 }
+    raise '値は正の値のみ有効です' if number < 0
 
     @number = number
     @value = value
@@ -344,11 +339,10 @@ class FizzBuzzValue
 end
 
 class FizzBuzzList
-  include Assertions
   attr_reader :value
 
   def initialize(list)
-    assert { list.count <= 100}
+    raise '100件より多く保持できません' if list.count > 100
 
     @value = list
   end
