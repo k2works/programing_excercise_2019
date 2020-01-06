@@ -55,8 +55,8 @@ class FizzBuzzTest < Minitest::Test
   describe 'FizzBuzz' do
     describe '1から100までの数' do
       def setup
-        @fizzbuzz = FizzBuzz.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
-        @result = @fizzbuzz.generate_list
+        @fizzbuzz = FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+        @result = @fizzbuzz.execute(100)
       end
 
       def test_はじめは文字列1を返す
@@ -358,5 +358,15 @@ class FizzBuzzValueCommand < FizzBuzzCommand
 
   def execute(number)
     @type.generate(number)
+  end
+end
+
+class FizzBuzzValueListCommand < FizzBuzzCommand
+  def initialize(type)
+    @type = type
+  end
+
+  def execute(number)
+    (1..number).map { |i| @type.generate(i) }
   end
 end
