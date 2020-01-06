@@ -123,25 +123,25 @@ class FizzBuzzTest < Minitest::Test
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列3を返す
-          assert_equal '3', @fizzbuzz.generate(3, 2)
+          assert_equal '3', @fizzbuzz.generate(3)
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列5を返す
-          assert_equal '5', @fizzbuzz.generate(5, 2)
+          assert_equal '5', @fizzbuzz.generate(5)
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列15を返す
-          assert_equal '15', @fizzbuzz.generate(15, 2)
+          assert_equal '15', @fizzbuzz.generate(15)
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.generate(1, 2)
+          assert_equal '1', @fizzbuzz.generate(1)
         end
       end
     end
@@ -250,6 +250,9 @@ class FizzBuzzType01
 end
 
 class FizzBuzzType02
+  def generate(number)
+    number.to_s
+  end
 end
 
 class FizzBuzzType03
