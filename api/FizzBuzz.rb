@@ -52,39 +52,39 @@ require 'json'
 =end
 
 class FizzBuzzTest < Minitest::Test
-  describe 'FizzBuzz' do
+  describe 'FizzBuzzServiceTest' do
     describe 'タイプ1の場合' do
       def setup
         @fizzbuzz =
-          FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+          FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
       end
 
       describe '三の倍数の場合' do
         def test_3を渡したら文字列Fizzを返す
-          assert_equal 'Fizz', @fizzbuzz.execute(3).value
+          assert_equal 'Fizz', @fizzbuzz.generate(3)
         end
       end
 
       describe '五の倍数の場合' do
         def test_5を渡したら文字列Buzzを返す
-          assert_equal 'Buzz', @fizzbuzz.execute(5).value
+          assert_equal 'Buzz', @fizzbuzz.generate(5)
         end
       end
 
       describe '三と五の倍数の場合' do
         def test_15を渡したら文字列FizzBuzzを返す
-          assert_equal 'FizzBuzz', @fizzbuzz.execute(15).value
+          assert_equal 'FizzBuzz', @fizzbuzz.generate(15)
         end
       end
 
       describe 'その他の場合' do
         def test_1を渡したら文字列1を返す
-          assert_equal '1', @fizzbuzz.execute(1).value
+          assert_equal '1', @fizzbuzz.generate(1)
         end
 
         def test_値は正の値のみ許可する
           e = assert_raises RuntimeError do
-            FizzBuzzValueCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).execute(-1)
+            FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).generate(-1)
           end
 
           assert_equal '値は正の値のみ有効です', e.message
@@ -92,7 +92,7 @@ class FizzBuzzTest < Minitest::Test
 
         def test_100より多い数を許可しない
           e = assert_raises RuntimeError do
-            FizzBuzzValueListCommand.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).execute(101)
+            FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType::TYPE_01)).generate_list(101)
           end
 
           assert_equal '100件より多く保持できません', e.message
@@ -102,10 +102,10 @@ class FizzBuzzTest < Minitest::Test
       describe '1から100までの数' do
         def setup
           @fizzbuzz =
-            FizzBuzzValueListCommand.new(
+            FizzBuzzService.new(
               FizzBuzzType.create(FizzBuzzType::TYPE_01)
             )
-          @result = @fizzbuzz.execute(100)
+          @result = @fizzbuzz.generate_list(100)
         end
 
         def test_はじめは文字列1を返す
@@ -388,5 +388,25 @@ class FizzBuzzJsonValueListCommand < FizzBuzzCommand
   def execute(number)
     command = FizzBuzzValueListCommand.new(@type)
     { data: command.execute(number) }.to_json
+  end
+end
+
+class FizzBuzzService
+  def initialize(type)
+    @value_command = FizzBuzzValueCommand.new(type)
+    @list_command = FizzBuzzValueListCommand.new(type)
+    @json_list_command = FizzBuzzJsonValueListCommand.new(type)
+  end
+
+  def generate(number)
+    @value_command.execute(number).value
+  end
+
+  def generate_list(number)
+    @list_command.execute(number)
+  end
+
+  def generate_json_list(number)
+    @json_list_command.execute(number)
   end
 end
