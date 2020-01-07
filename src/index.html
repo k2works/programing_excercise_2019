@@ -243,7 +243,7 @@
 
         test("Apiサービスを呼び出す", () => {
           return service.generateListFromApi().then(data => {
-            assert.equal(data[2], "Fizz");
+            assert.equal(data[2].value, "Fizz");
           });
         });
       });
@@ -322,15 +322,15 @@
               let col = [];
               data.forEach((v, k) => {
                 if ((k + 1) % 10 === 0) {
-                  col.push(`<td>${v}</t>`);
+                  col.push(`<td>${v.value}</td>`);
                   result[row++] = col;
                   col = [];
                 } else {
-                  col.push(`<td>${v}</t>`);
+                  col.push(`<td>${v.value}</td>`);
                 }
               });
 
-              return result;
+              return result.map(i => i.join(""));
             })();
 
             return `

@@ -131,11 +131,8 @@ class FizzBuzzTest < Minitest::Test
 
       describe 'プリントする' do
         def test_json形式でFizzBuzzListを返す
-          list =
-            FizzBuzzJsonValueListCommand.new(
-              FizzBuzzType.create(FizzBuzzType::TYPE_01)
-            )
-              .execute(100)
+          service = FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+          list = service.generate_json_list(100)
           result = JSON.parse(list)
           assert_equal 'Fizz', result['data'][2]['value']
         end
