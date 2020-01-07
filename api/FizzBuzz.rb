@@ -131,7 +131,7 @@ class FizzBuzzTest < Minitest::Test
 
       describe 'プリントする' do
         def test_json形式でFizzBuzzListを返す
-          service = FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType::TYPE_01))
+          service = FizzBuzzService.new(FizzBuzzType.create(FizzBuzzType.value_of('1')))
           list = service.generate_json_list(100)
           result = JSON.parse(list)
           assert_equal 'Fizz', result['data'][2]['value']
@@ -268,6 +268,16 @@ class FizzBuzzType
       FizzBuzzType03.new
     else
       raise '該当するタイプは存在しません'
+    end
+  end
+
+  def self.value_of(type)
+    case type
+    when '1' then TYPE_01
+    when '2' then TYPE_02
+    when '3' then TYPE_03
+    else
+      TYPE_01
     end
   end
 

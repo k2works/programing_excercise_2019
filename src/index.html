@@ -241,9 +241,29 @@
           assert.equal(result[2], "Fizz");
         });
 
-        test("Apiサービスを呼び出す", () => {
-          return service.generateListFromApi().then(data => {
-            assert.equal(data[2].value, "Fizz");
+        suite("Apiサービスを呼び出す", () => {
+          test("タイプ1の場合は３を渡すとFizzを返す", () => {
+            return service.generateListFromApi("1").then(data => {
+              assert.equal(data[2].value, "Fizz");
+            });
+          });
+
+          test("タイプ2の場合は３を渡すと３を返す", () => {
+            return service.generateListFromApi("2").then(data => {
+              assert.equal(data[2].value, "3");
+            });
+          });
+
+          test("タイプ3の場合は３を渡すと３を返す", () => {
+            return service.generateListFromApi("3").then(data => {
+              assert.equal(data[2].value, "3");
+            });
+          });
+
+          test("タイプ3の場合は１５を渡すとFizzBuzzを返す", () => {
+            return service.generateListFromApi("3").then(data => {
+              assert.equal(data[14].value, "FizzBuzz");
+            });
           });
         });
       });
@@ -279,7 +299,7 @@
 
       class FizzBuzzService {
         static get API_URL() {
-          return "https://programingexcercise2019-qxdng37dm.now.sh/api";
+          return "https://programingexcercise2019.k2works.now.sh/api";
         }
 
         generateList() {
@@ -287,9 +307,9 @@
           return fizzbuzz.generateList();
         }
 
-        generateListFromApi() {
+        generateListFromApi(type) {
           return new Promise((resolve, rejcet) => {
-            fetch(FizzBuzzService.API_URL)
+            fetch(`${FizzBuzzService.API_URL}/?type=${type}`)
               .then(response => {
                 return response.json();
               })
@@ -391,7 +411,8 @@
         }
 
         render() {
-          this._service.generateListFromApi().then(data => {
+          const type = this._selectedValue || "1";
+          this._service.generateListFromApi(type).then(data => {
             document.querySelector(
               "#app-fizzbuzz"
             ).innerHTML = this.createTable(data);
