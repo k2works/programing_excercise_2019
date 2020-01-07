@@ -378,8 +378,8 @@
               return result.map(i => i.join(""));
             })();
 
-            return `
-                ${select}
+            const table = (() => {
+              return `
                 <table class="table table-striped table-responsive-md">
                   <thead>
                     ${th[0]}
@@ -406,6 +406,12 @@
                     <tr>${row[9]}</tr>
                   </tbody>
                 </table>
+              `;
+            })();
+
+            return `
+                ${select}
+                ${table}
         `;
           })();
         }
