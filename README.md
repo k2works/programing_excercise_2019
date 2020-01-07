@@ -3,6 +3,9 @@
 
 ## 概要
 
+- [スライド](https://gitpitch.com/k2works/programing_excercise_2019)
+- [デモ](https://programingexcercise2019.k2works.now.sh/)
+
 ### 目的
 
 ### 前提
